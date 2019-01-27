@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/27 08:38:58 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/01/27 09:39:43 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,54 @@ t_list	*add_to_list(t_list *list, char *line)
 	return (tmp);
 }
 
+void	read_name(t_lem *all, int i)
+{
+	int	j;
+	int	len;
+
+	j = 0;
+	if (i <= 0 )
+		exit(1);
+	all->name = (char **)malloc(sizeof(char *) * i);
+	while(j < i)
+	{
+		len = ft_strchr(all->rooms->content, ' ') - &all->rooms->content;
+		all->name[j] = malloc(sizeof(char) * len + 1);
+		ft_strncpy(all->name[j], all->rooms->content, len);
+		all->name[j][len + 1] = '\0';
+		j++;
+	}
+}
+
 void	read_rooms(t_lem *all)
 {
 	char	*line;
 	t_list	*list;
 	int		i;
+	int		k;
 
+	i = 0;
 	while (get_next_line(g_fd, &line) > 0)
 	{
-		i = 0;
+		k = 0;
 		if (line[0] == '#')
 		{
 			if (!ft_strcmp("##start", line))
 				all->start = list->content_size;
 			else if (!ft_strcmp("##end", line))
 				all->end = list->content_size;
-			i = 1;
+			k = 1;
 		}
 		else if (!ft_strchr(line, ' '))
 			break ;
-		if (i == 0)
-			all->rooms = add_to_list(all->rooms, line);
+		if (k == 0)
+		{
+			list = add_to_list(all->rooms, line);
+			i++;
+		}
 		free(line);
 	}
+	read_name(all, i);
 }
 
 int	main()
