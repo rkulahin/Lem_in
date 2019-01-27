@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/27 09:39:43 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/01/27 09:50:57 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,15 @@ void	read_name(t_lem *all, int i)
 		all->name[j][len + 1] = '\0';
 		j++;
 	}
+	all->n_room = i;
 }
 
 void	read_rooms(t_lem *all)
 {
 	char	*line;
 	t_list	*list;
-	int		i;
 	int		k;
 
-	i = 0;
 	while (get_next_line(g_fd, &line) > 0)
 	{
 		k = 0;
@@ -58,18 +57,14 @@ void	read_rooms(t_lem *all)
 				all->start = list->content_size;
 			else if (!ft_strcmp("##end", line))
 				all->end = list->content_size;
-			k = 1;
 		}
 		else if (!ft_strchr(line, ' '))
 			break ;
-		if (k == 0)
-		{
+		else
 			list = add_to_list(all->rooms, line);
-			i++;
-		}
 		free(line);
 	}
-	read_name(all, i);
+	read_name(all, all->rooms->content_size - 1);
 }
 
 int	main()
