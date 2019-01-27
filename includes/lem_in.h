@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:10:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/27 09:41:58 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/01/27 21:32:34 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ typedef	struct	s_lem
 	int			end;
 	int			n_room;
 	t_list		*rooms;
-	char		**connects;
+	int			**connects;
 	char		**name;
+	int			**way;
 }				t_lem;
 
 

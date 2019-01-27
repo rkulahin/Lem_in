@@ -1,0 +1,11 @@
+5
+rrr 1 1
+##start
+aaaa 1 1
+dda 1 1
+##end
+bbb 2 2
+ddd 1 1
+aaaa-bbb
+rrr-ddd
+rrr-bbb

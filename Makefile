@@ -6,7 +6,7 @@
 #    By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/26 13:22:53 by rkulahin          #+#    #+#              #
-#    Updated: 2019/01/26 14:12:45 by rkulahin         ###   ########.fr        #
+#    Updated: 2019/01/27 18:57:24 by rkulahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ SRC_DIR = ./srcs/
 SRC = main.c
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INCL = -I includes/
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 
 all: $(NAME)
 $(NAME):	$(OBJ) $(LIB)
-	gcc -o $(NAME) $(FLAGS) $(OBJ) $(LIB)
+	gcc -g -o $(NAME) $(FLAGS) $(OBJ) $(LIB)
 
 $(OBJ):		| $(OBJ_DIR)
 
