@@ -10,12 +10,11 @@
 			"request": "launch",
 			"program": "/Users/rkulahin/Desktop/Lem_in/lem_in",
 			"args": [],
-			"stopAtEntry": true,
+			"stopAtEntry": false,
 			"cwd": "/Users/rkulahin/Desktop/Lem_in",
 			"environment": [],
 			"externalConsole": true,
 			"MIMode": "lldb",
-			"logging": { "engineLogging": true, "trace": true, "traceResponse": true }
 		}
 	]
 }

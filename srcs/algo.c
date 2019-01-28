@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cwords.c                                        :+:      :+:    :+:   */
+/*   algo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 17:10:09 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/28 14:12:53 by rkulahin         ###   ########.fr       */
+/*   Created: 2019/01/28 09:51:53 by rkulahin          #+#    #+#             */
+/*   Updated: 2019/01/28 09:51:57 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-int		ft_cwords(char const *str, char c)
+void	algo_lem(t_lem *all)
 {
-	int count;
-	int	i;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (str[i] == c)
-			i++;
-		if (str[i] != c && str[i] != '\0')
-			count++;
-		while (str[i] != c && str[i] != '\0')
-			i++;
-	}
-	return ((int)count);
+	
 }

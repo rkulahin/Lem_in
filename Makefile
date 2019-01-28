@@ -6,7 +6,7 @@
 #    By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/26 13:22:53 by rkulahin          #+#    #+#              #
-#    Updated: 2019/01/27 18:57:24 by rkulahin         ###   ########.fr        #
+#    Updated: 2019/01/28 11:13:00 by rkulahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,17 @@ LIB = libftprintf.a
 OBJ_DIR	= ./obj/
 SRC_DIR = ./srcs/
 
-SRC = main.c
+SRC = main.c \
+	rooms.c \
+	connects.c
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INCL = -I includes/
-FLAGS = -Wall -Wextra -Werror
+FLAGS =	-g -Wall -Wextra -Werror
 
 
 all: $(NAME)
 $(NAME):	$(OBJ) $(LIB)
-	gcc -g -o $(NAME) $(FLAGS) $(OBJ) $(LIB)
+	gcc -o $(NAME) $(FLAGS) $(OBJ) $(LIB)
 
 $(OBJ):		| $(OBJ_DIR)
 
