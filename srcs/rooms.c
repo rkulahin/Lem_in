@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/28 09:45:39 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/28 14:25:26 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/01/30 15:46:36 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	read_name(t_lem *all, int i)
 	list = all->rooms;
 	if (i <= 0)
 		exit(1);
-	all->name = (char **)malloc(sizeof(char *) * i);
+	all->name = (char **)malloc(sizeof(char *) * i + 1);
 	while (j < i)
 	{
 		len = ft_strchr(list->content, ' ') - (char *)list->content;
@@ -44,6 +44,7 @@ void	read_name(t_lem *all, int i)
 		list = list->next;
 		j++;
 	}
+	all->name[i] = "\0";
 	all->n_room = i;
 }
 

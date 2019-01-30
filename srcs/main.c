@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/28 14:58:17 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/01/30 16:36:29 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int		main(void)
 {
 	t_lem		*all;
 	char		*line;
+	int			i;
 
+	i = -1;
 	all = malloc(sizeof(t_lem));
 	all->rooms = malloc(sizeof(t_list));
 	all->rooms->content_size = 0;
@@ -51,8 +53,14 @@ int		main(void)
 	{
 		line = read_rooms(all);
 		read_connects(all, line);
-		// algo_lem(all);
-		test(all);
+		all->path = (int *)malloc(sizeof(int) * 1000);
+		while (++i < 1000)
+			all->path[i] = -1;
+		all->p_index = 0;
+		all->curr_room = 0;
+		if(algo_lem(all, 0))
+			print_all(all);
+
 	}
 	return (0);
 }

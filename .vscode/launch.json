@@ -10,7 +10,7 @@
 			"request": "launch",
 			"program": "/Users/rkulahin/Desktop/Lem_in/lem_in",
 			"args": [],
-			"stopAtEntry": false,
+			"stopAtEntry": true,
 			"cwd": "/Users/rkulahin/Desktop/Lem_in",
 			"environment": [],
 			"externalConsole": true,
