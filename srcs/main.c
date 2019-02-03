@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/01/30 16:36:29 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/03 17:09:54 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,55 @@
 
 void	test(t_lem *all)
 {
-	int		i;
-	int		j;
-
-	i = 0;
-	ft_printf("number of ants: %i\n", all->ants);
-	ft_printf("number of rooms: %i\n", all->n_room);
-	ft_printf("start: %s\nend: %s\n", all->name[all->start], all->name[all->end]);
-	while (i < all->n_room)
+	ft_printf("%i\n", all->ants);
+	ft_printf("start: %s\n", all->start->name);
+	ft_printf("end: %s\n", all->end->name);
+	while (all->rooms->name != NULL)
 	{
-		ft_printf("%s :%i:\n", all->name[i], i);
-		i++;
-	}
-	i = -1;
-	while (++i < all->n_room && (j = -1) == -1)
-	{
-		while (++j < all->n_room)
-			ft_printf("%i", all->connects[i][j]);
+		ft_printf("room: %s x:%i y:%i index:%i\n", all->rooms->name, all->rooms->x, all->rooms->y, all->rooms->index);
+		while (all->rooms->links)
+		{
+			ft_printf("[%s]", all->rooms->links->name);
+			all->rooms->links = all->rooms->links->next;
+		}
 		ft_printf("\n");
+		all->rooms = all->rooms->next;
 	}
 }
 
-int		main(void)
+void	error(void)
+{
+	ft_printf("ERROR");
+	exit(1);
+}
+
+t_lem	*init(void)
+{
+	t_lem *all;
+
+	all = (t_lem *)malloc(sizeof(t_lem));
+	all->rooms = (t_room *)malloc(sizeof(t_room));
+	all->rooms->name = NULL;
+	all->rooms->next = NULL;
+	all->paths = (t_path **)malloc(sizeof(t_path *));
+	all->start = NULL;
+	all->end = NULL;
+	return (all);
+}
+
+int		main(int ac, char **av)
 {
 	t_lem		*all;
-	char		*line;
-	int			i;
 
-	i = -1;
-	all = malloc(sizeof(t_lem));
-	all->rooms = malloc(sizeof(t_list));
-	all->rooms->content_size = 0;
-	g_fd = open("test", O_RDWR);
-	get_next_line(g_fd, &line);
-	all->ants = ft_atoi(line);
-	free(line);
-	if (all->ants > 0)
-	{
-		line = read_rooms(all);
-		read_connects(all, line);
-		all->path = (int *)malloc(sizeof(int) * 1000);
-		while (++i < 1000)
-			all->path[i] = -1;
-		all->p_index = 0;
-		all->curr_room = 0;
-		if(algo_lem(all, 0))
-			print_all(all);
-
-	}
+	if (ac != 2)
+		error();
+	g_fd = open(av[1], O_RDWR);
+	if (g_fd <= 0)
+		error();
+	all = init();
+	read_ant(all);
+	read_rooms(all, 0);
+	read_links(all);
+	test(all);
 	return (0);
 }

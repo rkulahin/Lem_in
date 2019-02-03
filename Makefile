@@ -6,7 +6,7 @@
 #    By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/26 13:22:53 by rkulahin          #+#    #+#              #
-#    Updated: 2019/01/30 15:09:06 by rkulahin         ###   ########.fr        #
+#    Updated: 2019/02/03 14:11:27 by rkulahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,7 @@ OBJ_DIR	= ./obj/
 SRC_DIR = ./srcs/
 
 SRC = main.c \
-	rooms.c \
-	connects.c \
-	algo_lem.c \
-	print_result.c
+read.c
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INCL = -I includes/
 FLAGS =	-g -Wall -Wextra -Werror
