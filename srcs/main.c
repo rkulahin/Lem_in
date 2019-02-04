@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/03 17:09:54 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:58:19 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void	test(t_lem *all)
 {
+	ft_printf("%i\n", all->mlvl);
 	ft_printf("%i\n", all->ants);
 	ft_printf("start: %s\n", all->start->name);
 	ft_printf("end: %s\n", all->end->name);
-	while (all->rooms->name != NULL)
+	while (all->rooms)
 	{
-		ft_printf("room: %s x:%i y:%i index:%i\n", all->rooms->name, all->rooms->x, all->rooms->y, all->rooms->index);
+		ft_printf("room: %s x:%i y:%i lvl:%i\n", all->rooms->name, all->rooms->x, all->rooms->y, all->rooms->lvl);
 		while (all->rooms->links)
 		{
-			ft_printf("[%s]", all->rooms->links->name);
+			ft_printf("[%s]", all->rooms->links->room->name);
 			all->rooms->links = all->rooms->links->next;
 		}
 		ft_printf("\n");
@@ -41,10 +42,8 @@ t_lem	*init(void)
 	t_lem *all;
 
 	all = (t_lem *)malloc(sizeof(t_lem));
-	all->rooms = (t_room *)malloc(sizeof(t_room));
-	all->rooms->name = NULL;
-	all->rooms->next = NULL;
-	all->paths = (t_path **)malloc(sizeof(t_path *));
+	all->rooms = NULL;
+	all->paths = NULL;
 	all->start = NULL;
 	all->end = NULL;
 	return (all);
@@ -61,8 +60,8 @@ int		main(int ac, char **av)
 		error();
 	all = init();
 	read_ant(all);
-	read_rooms(all, 0);
-	read_links(all);
+	read_rooms_links(all, 0);
+	set_lvl(all, 1, 0);
 	test(all);
 	return (0);
 }

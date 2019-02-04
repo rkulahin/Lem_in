@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:10:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/03 17:17:25 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/04 16:40:00 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ int				g_fd;
 typedef	struct s_lem	t_lem;
 typedef	struct s_room	t_room;
 typedef	struct s_path	t_path;
+typedef struct s_link	t_link;
+
+struct			s_link
+{
+	t_room		*room;
+	t_link		*next;
+};
 
 struct			s_room
 {
@@ -32,19 +39,21 @@ struct			s_room
 	int			lvl;
 	int			index;
 	int			busy;
-	t_room		*links;
+	t_link		*links;
 	t_room		*next;
 };
 
 struct			s_path
 {
-	t_room		*room;
+	t_link		*path;
+	int			lengh;
 	t_path		*next;
 };
 
 struct			s_lem
 {
 	int			ants;
+	int			mlvl;
 	char		*line;
 	t_room		*rooms;
 	t_room		*start;
@@ -53,11 +62,17 @@ struct			s_lem
 };
 
 void			read_ant(t_lem *all);
-void			save_room(t_room **tmp, char **str, int index);
-void			read_rooms(t_lem *all, int index);
+void			read_rooms_links(t_lem *all, int index);
 void			error();
-void			read_links(t_lem *all);
-void			save_link(t_room *f, t_room *s);
+void			test(t_lem *all);
 
+void			add_room(t_room **rooms, t_room *new);
+t_room			*new_room(char **str);
+int				read_rooms(t_lem *all, int *index, int *k);
+
+void			add_links(t_link **m, t_room *add);
+int				read_links(t_lem *all);
+
+void			set_lvl(t_lem *all, int k, int index);
 
 #endif
