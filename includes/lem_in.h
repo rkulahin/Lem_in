@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:10:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/04 16:40:00 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/05 10:35:00 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ struct			s_room
 struct			s_path
 {
 	t_link		*path;
+	int			index;
 	int			lengh;
-	t_path		*next;
 };
 
 struct			s_lem
@@ -58,7 +58,7 @@ struct			s_lem
 	t_room		*rooms;
 	t_room		*start;
 	t_room		*end;
-	t_path		**paths;
+	t_path		*paths;
 };
 
 void			read_ant(t_lem *all);
