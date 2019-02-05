@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/05 10:24:16 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:40:01 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,16 @@ t_lem	*init(void)
 	return (all);
 }
 
-void	init_path(t_lem *all)
+t_path	*init_path(void)
 {
-	t_link	*links;
-	int		i;
+	t_path	*paths;
 
-	i = 0;
-	links = all->end->links;
-	while (links)
-	{
-		i++;
-		links = links->next;
-	}
+	paths = (t_path *)malloc(sizeof(t_path));
+	paths->path = NULL;
+	paths->next = NULL;
+	paths->index = 0;
+	paths->lengh = 0;
+	return (paths);
 }
 
 int		main(int ac, char **av)
@@ -75,8 +73,11 @@ int		main(int ac, char **av)
 	all = init();
 	read_ant(all);
 	read_rooms_links(all, 0);
-	init_path(all);
+	all->start->lvl = 0;
+	all->start->busy = 0;
 	set_lvl(all, 1, 0);
+	find_path(all, 0);
+	ft_printf("a");
 	test(all);
 	return (0);
 }

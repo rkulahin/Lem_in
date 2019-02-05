@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:23:18 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/04 15:35:36 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/05 17:39:32 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_room	*new_room(char **str)
 	new->name = ft_strdup(str[0]);
 	new->x = ft_atoi(str[1]);
 	new->y = ft_atoi(str[2]);
-	new->lvl = 1;
+	new->lvl = -1;
 	new->busy = 1;
 	new->next = NULL;
 	free_arr(str);
