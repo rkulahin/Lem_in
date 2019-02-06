@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:23:18 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/05 17:39:32 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/06 16:12:33 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_room	*new_room(char **str)
 	new->lvl = -1;
 	new->busy = 1;
 	new->next = NULL;
+	new->links = NULL;
 	free_arr(str);
 	return (new);
 }

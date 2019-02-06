@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:10:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/05 17:21:28 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/06 12:35:49 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct			s_lem
 void			read_ant(t_lem *all);
 void			read_rooms_links(t_lem *all, int index);
 void			error();
+void			free_arr(char **str);
 void			test(t_lem *all);
 
 void			add_room(t_room **rooms, t_room *new);

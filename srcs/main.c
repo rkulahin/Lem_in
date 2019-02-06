@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/05 17:40:01 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/06 16:46:15 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void	test(t_lem *all)
 {
+	int i;
+
+	i = 0;
 	ft_printf("%i\n", all->mlvl);
 	ft_printf("%i\n", all->ants);
 	ft_printf("start: %s\n", all->start->name);
 	ft_printf("end: %s\n", all->end->name);
-	while (all->rooms)
+	while (all->rooms && i < 716)
 	{
 		ft_printf("room: %s x:%i y:%i lvl:%i\n", all->rooms->name, all->rooms->x, all->rooms->y, all->rooms->lvl);
 		while (all->rooms->links)
@@ -28,6 +31,20 @@ void	test(t_lem *all)
 		}
 		ft_printf("\n");
 		all->rooms = all->rooms->next;
+		i++;
+	}
+	i = 0;
+	while (all->paths)
+	{
+		ft_printf("path %i path len:%i    : ", all->paths->index, all->paths->lengh);
+		while (all->paths->path)
+		{
+			ft_printf("[%s] ", all->paths->path->room->name);
+			all->paths->path = all->paths->path->next;
+		}
+		ft_printf("\n");
+		all->paths = all->paths->next;
+		i++;
 	}
 }
 
@@ -46,6 +63,7 @@ t_lem	*init(void)
 	all->paths = NULL;
 	all->start = NULL;
 	all->end = NULL;
+	all->line = NULL;
 	return (all);
 }
 
@@ -75,9 +93,10 @@ int		main(int ac, char **av)
 	read_rooms_links(all, 0);
 	all->start->lvl = 0;
 	all->start->busy = 0;
+	all->end->busy = 1;
 	set_lvl(all, 1, 0);
 	find_path(all, 0);
-	ft_printf("a");
+	// system("Leaks lem_in");
 	test(all);
 	return (0);
 }

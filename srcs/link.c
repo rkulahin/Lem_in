@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:19:02 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/05 17:45:04 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:39:22 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	add_links(t_link **m, t_room *add)
 		tmp = tmp->next;
 	tmp->next = (t_link *)malloc(sizeof(t_link));
 	tmp->next->room = add;
+	tmp->next->next = NULL;
 }
 
 int		read_links(t_lem *all)
@@ -47,6 +48,7 @@ int		read_links(t_lem *all)
 			second = rooms;
 		rooms = rooms->next;
 	}
+	free_arr(str);
 	if (first && second)
 	{
 		add_links(&first->links, second);

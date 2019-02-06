@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:50:52 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/05 17:29:30 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/06 16:37:32 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_room	*find_low_lvl(t_link *find)
 	}
 	if (tmp->busy == 1)
 		return (NULL);
+	if (tmp->lvl != 0)
+		tmp->busy = 1;
 	return (tmp);
 }
 
@@ -97,13 +99,52 @@ void	add_room_to_path(t_path *paths, t_room *room)
 	paths->path = tmp;
 }
 
+void	add_path(t_lem *all, t_path **new)
+{
+	t_path	*tmp;
+
+	tmp = all->paths;
+	if (all->paths == NULL)
+	{
+		all->paths = *new;
+		all->paths->next = NULL;
+		return ;
+	}
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = (*new);
+}
+
+int		valid_path(t_lem *all, t_path **new)
+{
+	t_path	*tmp;
+	t_link	*t;
+
+	tmp = all->paths;
+	if ((*new)->lengh == -1)
+	{
+		while ((*new)->path)
+		{
+			t = (*new)->path->next;
+			if (t == NULL)
+				break ;
+			free((*new)->path);
+			(*new)->path = t;
+		}
+		(*new)->lengh = 0;
+		(*new)->path = NULL;
+		return (0);
+	}
+	add_path(all, new);
+	return (1);
+}
+
 void	find_path(t_lem *all, int k)
 {
 	t_room	*tmp;
 	t_path	*new;
 
 	new = init_path();
-	all->paths = new;
 	while (find_end_zero(all->end->links))
 	{
 		tmp = all->end;
@@ -121,7 +162,7 @@ void	find_path(t_lem *all, int k)
 			}
 			k = 1;
 		}
-		new = new->next;
-		new = init_path();
+		if (valid_path(all, &new))
+			new = init_path();
 	}
 }
