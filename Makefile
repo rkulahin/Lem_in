@@ -6,7 +6,7 @@
 #    By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/26 13:22:53 by rkulahin          #+#    #+#              #
-#    Updated: 2019/02/04 15:57:59 by rkulahin         ###   ########.fr        #
+#    Updated: 2019/02/07 12:07:33 by rkulahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC = main.c \
 read.c \
 room.c \
 link.c \
-path.c
+path.c \
+ant.c
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INCL = -I includes/
 FLAGS =	-g -Wall -Wextra -Werror

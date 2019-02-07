@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:19:02 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/06 14:39:22 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:05:58 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	add_links(t_link **m, t_room *add)
 	if ((*m) == NULL)
 	{
 		(*m) = (t_link *)malloc(sizeof(t_link));
+		(*m)->n_ant = 0;
+		(*m)->ant_busy = 0;
 		(*m)->next = NULL;
 		(*m)->room = add;
 		return ;
@@ -27,6 +29,8 @@ void	add_links(t_link **m, t_room *add)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = (t_link *)malloc(sizeof(t_link));
+	tmp->next->ant_busy = 0;
+	tmp->next->n_ant = 0;
 	tmp->next->room = add;
 	tmp->next->next = NULL;
 }

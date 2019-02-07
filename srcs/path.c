@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:50:52 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/06 16:37:32 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/07 18:06:40 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,18 @@ t_room	*find_low_lvl(t_link *find)
 	return (tmp);
 }
 
-void	add_room_to_path(t_path *paths, t_room *room)
+int	add_room_to_path(t_path *paths, t_room *room, int k)
 {
 	t_link	*tmp;
 
 	tmp = (t_link *)malloc(sizeof(t_link));
 	tmp->room = room;
+	tmp->n_ant = 0;
+	tmp->ant_busy = 0;
 	tmp->next = paths->path;
 	paths->path = tmp;
+	k++;
+	return (k);
 }
 
 void	add_path(t_lem *all, t_path **new)
@@ -112,30 +116,33 @@ void	add_path(t_lem *all, t_path **new)
 	}
 	while (tmp->next)
 		tmp = tmp->next;
+	(*new)->index = tmp->index + 1;
 	tmp->next = (*new);
 }
 
-int		valid_path(t_lem *all, t_path **new)
+int		valid_path(t_lem *all, t_path *new)
 {
 	t_path	*tmp;
 	t_link	*t;
 
 	tmp = all->paths;
-	if ((*new)->lengh == -1)
+	if (new->lengh == -1)
 	{
-		while ((*new)->path)
+		while (new->path)
 		{
-			t = (*new)->path->next;
+			t = new->path->next;
 			if (t == NULL)
 				break ;
-			free((*new)->path);
-			(*new)->path = t;
+			free(new->path);
+			new->path = t;
 		}
-		(*new)->lengh = 0;
-		(*new)->path = NULL;
+		new->lengh = 0;
+		free(new->path);
+		new->path = NULL;
+		free(new);
 		return (0);
 	}
-	add_path(all, new);
+	add_path(all, &new);
 	return (1);
 }
 
@@ -149,20 +156,21 @@ void	find_path(t_lem *all, int k)
 	{
 		tmp = all->end;
 		k = 0;
-		while (tmp->lvl != 0)
+		while (tmp != NULL && tmp->lvl != 0)
 		{
-			add_room_to_path(new, tmp);
+			k = add_room_to_path(new, tmp, k);
 			tmp = find_low_lvl(tmp->links);
-			if (k == 0)
-				new->lengh = tmp->lvl + 1;
-			if (tmp == NULL)
-			{
-				new->lengh = -1;
-				break ;
-			}
-			k = 1;
 		}
-		if (valid_path(all, &new))
+		if (tmp == NULL)
+			new->lengh = -1;
+		else
+			new->lengh = k;
+		if (valid_path(all, new))
+		{
+			if (new->lengh == 1)
+				return ;
 			new = init_path();
+		}
 	}
+	free(new);
 }

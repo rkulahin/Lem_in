@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/06 16:46:15 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/07 19:15:09 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void	test(t_lem *all)
 	i = 0;
 	while (all->paths)
 	{
-		ft_printf("path %i path len:%i    : ", all->paths->index, all->paths->lengh);
+		ft_printf("path %i path len:%i  ant:%i   : ", all->paths->index, all->paths->lengh, all->paths->ants);
 		while (all->paths->path)
 		{
 			ft_printf("[%s] ", all->paths->path->room->name);
 			all->paths->path = all->paths->path->next;
 		}
-		ft_printf("\n");
+		ft_printf("[antlen:%i]\n", all->paths->lengh + all->paths->ants);
 		all->paths = all->paths->next;
 		i++;
 	}
@@ -74,6 +74,7 @@ t_path	*init_path(void)
 	paths = (t_path *)malloc(sizeof(t_path));
 	paths->path = NULL;
 	paths->next = NULL;
+	paths->ants = 0;
 	paths->index = 0;
 	paths->lengh = 0;
 	return (paths);
@@ -91,12 +92,16 @@ int		main(int ac, char **av)
 	all = init();
 	read_ant(all);
 	read_rooms_links(all, 0);
+	if (!all->start || !all->end)
+		error();
 	all->start->lvl = 0;
 	all->start->busy = 0;
 	all->end->busy = 1;
 	set_lvl(all, 1, 0);
 	find_path(all, 0);
+	add_ant_to_path(all->paths, all->ants);
+	put_ant(all);
+	// test(all);
 	// system("Leaks lem_in");
-	test(all);
 	return (0);
 }
