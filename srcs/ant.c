@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:02:23 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/07 19:23:22 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:01:21 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	move_ant(t_link *path, int *ants, int *ants_on)
 	t_link	*tmp;
 	int		count_ant;
 
-	tmp = path;
 	count_ant = ant_on_path(path);
 	while (count_ant)
 	{
+		tmp = path;
 		while (tmp && !tmp->ant_busy)
 			tmp = tmp->next;
 		while (tmp && tmp->next && tmp->next->ant_busy)
@@ -67,13 +67,13 @@ void	move_ant(t_link *path, int *ants, int *ants_on)
 		tmp->next->n_ant = tmp->n_ant;
 		tmp->n_ant = 0;
 		tmp->ant_busy = 0;
-		if (tmp->next)
-			ft_printf("L%i-%s ", tmp->next->n_ant, tmp->next->room->name);
+		ft_printf("L%i-%s ", tmp->next->n_ant, tmp->next->room->name);
 		if (!tmp->next->next)
 		{
-			ants--;
+			tmp->next->ant_busy = 0;
+			*ants -= 1;
 			ants_on--;
-			tmp->n_ant--;
+			tmp->n_ant = 0;
 		}
 		count_ant--;
 	}
@@ -95,8 +95,10 @@ void	put_ant(t_lem *all)
 {
 	t_path	*tmp;
 	int		k;
+	int		t;
 
 	k = 1;
+	t = all->ants;
 	while (all->ants)
 	{
 		ft_printf("\n");
@@ -104,10 +106,8 @@ void	put_ant(t_lem *all)
 		while (tmp)
 		{
 			move_ant(tmp->path, &all->ants, &tmp->ants);
-			if (tmp->ants)
-			{
+			if (tmp->ants && k <= t)
 				k = move_first(tmp->path, k);
-			}
 			tmp = tmp->next;
 		}
 	}

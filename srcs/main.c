@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:09:22 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/07 19:15:09 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:02:06 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		main(int ac, char **av)
 	set_lvl(all, 1, 0);
 	find_path(all, 0);
 	add_ant_to_path(all->paths, all->ants);
+	put_info(all);
 	put_ant(all);
 	// test(all);
 	// system("Leaks lem_in");

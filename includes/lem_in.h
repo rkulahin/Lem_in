@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:10:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/07 19:13:36 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/08 13:11:21 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void			put_ant(t_lem *all);
 int				move_first(t_link *path, int k);
 void			move_ant(t_link *path, int *ants, int *ants_on);
 
+void			put_info(t_lem *all);
+void			print_room(t_room *rooms, t_room *start, t_room *end);
 
 #endif

@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/Users/rkulahin/Desktop/Lem_in/lem_in",
-			"args": ["tests/big"],
+			"args": ["test"],
 			"stopAtEntry": true,
 			"cwd": "/Users/rkulahin/Desktop/Lem_in",
 			"environment": [],
