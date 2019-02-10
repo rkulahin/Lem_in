@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:02:23 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/08 13:01:21 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/10 12:26:43 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	add_ant_to_path(t_path *all, int ant)
 	int		ants;
 
 	ants = ant;
-	while (ants)
+	while (ants && all)
 	{
 		tmp = all;
 		low = tmp;
-		while (tmp->next)
+		while (tmp && tmp->next)
 		{
 			if (low->lengh + low->ants >= tmp->next->lengh + tmp->next->ants)
 				low = tmp->next;
@@ -79,7 +79,7 @@ void	move_ant(t_link *path, int *ants, int *ants_on)
 	}
 }
 
-int		move_first(t_link *path, int k)
+int		move_first(t_link *path, int k, int *t)
 {
 	if (!path->ant_busy)
 	{
@@ -87,6 +87,18 @@ int		move_first(t_link *path, int k)
 		path->ant_busy = 1;
 		k++;
 		ft_printf("L%i-%s ", path->n_ant, path->room->name);
+		if (!path->next)
+		{
+			while (*t != 1)
+			{
+				path->n_ant++;
+				ft_printf("L%i-%s ", path->n_ant, path->room->name);
+				path->ant_busy = 0;
+				*t -= 1;
+			}
+			ft_printf("\n");
+			exit(1);
+		}
 	}
 	return (k);
 }
@@ -107,8 +119,9 @@ void	put_ant(t_lem *all)
 		{
 			move_ant(tmp->path, &all->ants, &tmp->ants);
 			if (tmp->ants && k <= t)
-				k = move_first(tmp->path, k);
+				k = move_first(tmp->path, k, &all->ants);
 			tmp = tmp->next;
 		}
 	}
+	ft_printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 10:23:18 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/07 09:22:12 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/10 12:29:08 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		read_rooms(t_lem *all, int *index, int *k)
 	if (ft_cwords(all->line, ' ') == 3 && all->line[0] != '#' &&
 		all->line[0] != 'L')
 	{
-		if (*index == 1)
+		if (*index == 1 || ft_cwords(all->line, '-') == 2)
 			error();
 		str = ft_strsplit(all->line, ' ');
 		new = new_room(str);
