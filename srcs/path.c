@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:50:52 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/10 12:54:44 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/10 18:34:49 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,15 @@ int		valid_path(t_lem *all, t_path *new)
 	{
 		while (new->path)
 		{
-			t = new->path->next;
 			if (t == NULL)
 				break ;
+			t = new->path->next;
 			free(new->path);
 			new->path = t;
 		}
 		new->lengh = 0;
 		free(new->path);
 		new->path = NULL;
-		free(new);
 		return (0);
 	}
 	add_path(all, &new);

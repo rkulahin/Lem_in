@@ -6,7 +6,7 @@
 /*   By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/26 14:10:04 by rkulahin          #+#    #+#             */
-/*   Updated: 2019/02/10 12:56:10 by rkulahin         ###   ########.fr       */
+/*   Updated: 2019/02/10 18:24:28 by rkulahin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef	struct s_lem	t_lem;
 typedef	struct s_room	t_room;
 typedef	struct s_path	t_path;
 typedef struct s_link	t_link;
+typedef struct s_read	t_read;
+
+int				g_fd;
 
 struct			s_link
 {
@@ -52,12 +55,20 @@ struct			s_path
 	t_path		*next;
 };
 
+struct			s_read
+{
+	char		*str;
+	t_read		*last;
+	t_read		*next;
+};
+
 struct			s_lem
 {
 	int			ants;
 	int			mlvl;
 	char		*line;
-	char		*print;
+	int			k;
+	t_read		*print;
 	t_room		*rooms;
 	t_room		*start;
 	t_room		*end;
@@ -88,12 +99,15 @@ void			set_lvl(t_lem *all, int k, int index);
 int				change_lvl(t_room *room, int index);
 
 void			read_rooms_links(t_lem *all, int index);
-void			save_line(t_lem *all);
 void			read_ant(t_lem *all);
 
 void			add_room(t_room **rooms, t_room *new);
 void			free_arr(char **str);
 t_room			*new_room(char **str);
 int				read_rooms(t_lem *all, int *index, int *k);
+
+void			save_to_read(t_lem *all, t_read *new);
+void			print_read(t_lem *all);
+t_read			*init_read(t_lem *all);
 
 #endif

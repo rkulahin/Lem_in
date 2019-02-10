@@ -6,11 +6,11 @@
 #    By: rkulahin <rkulahin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/26 13:22:53 by rkulahin          #+#    #+#              #
-#    Updated: 2019/02/10 12:55:01 by rkulahin         ###   ########.fr        #
+#    Updated: 2019/02/10 18:26:27 by rkulahin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lem_in
+NAME = lem-in
 LIB = libftprintf.a
 
 OBJ_DIR	= ./obj/
@@ -22,7 +22,8 @@ room.c \
 link.c \
 path.c \
 ant.c \
-lvl.c
+lvl.c \
+read_print.c
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 INCL = -I includes/
 FLAGS =	-g -Wall -Wextra -Werror
